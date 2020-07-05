@@ -1,16 +1,10 @@
-use crate::util;
-use std::process::Command;
+use crate::{util,scripts};
 
 pub fn add() {
     let reminder = util::get_input("Reminder");
     let date = util::parse_date(util::get_input("When"));
 
-    let command = Command::new("osascript")
-        .arg("-e")
-        .arg(include_str!("scripts/add.applescript"))
-        .arg(&reminder)
-        .arg(&date)
-        .status();
+    let command = scripts::add_reminder(reminder, date);
 
     match command {
         Ok(_val) => println!("Reminder added."),
@@ -19,19 +13,14 @@ pub fn add() {
 }
 
 pub fn complete() {
-    let options = util::get_reminders();
+    let reminders = util::get_reminders();
 
-    if options.len() == 0 {
+    if reminders.len() == 0 {
         return println!("No reminders.");
     }
 
-    let selected = util::get_choice(options);
-
-    let command = Command::new("osascript")
-        .arg("-e")
-        .arg(include_str!("scripts/complete.applescript"))
-        .arg(&selected)
-        .output();
+    let selected = util::get_choice(reminders);
+    let command = scripts::complete_reminder(selected);
 
     match command {
         Ok(_val) => println!("Marked reminder as complete."),
