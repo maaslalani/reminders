@@ -9,6 +9,7 @@ fn main() {
         Some(val) => {
             match val.as_str() {
                 "list" => reminders::list(),
+                "add" => reminders::add(),
                 "complete" => reminders::complete(),
                 _ => help::usage(),
             }
