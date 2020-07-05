@@ -12,13 +12,18 @@ pub fn add() {
         .status();
 
     match command {
-        Ok(_val) => println!("Added \"{}\"", &reminder),
-        Err(_err) => eprintln!("Error: Unable to complete."),
+        Ok(_val) => println!("Reminder added."),
+        Err(_err) => eprintln!("Error: Unable to add reminder."),
     };
 }
 
 pub fn complete() {
     let options = util::get_reminders();
+
+    if options.len() == 0 {
+        return println!("No reminders.");
+    }
+
     let selected = util::get_choice(options);
 
     let command = Command::new("osascript")
@@ -27,11 +32,19 @@ pub fn complete() {
         .output();
 
     match command {
-        Ok(_val) => println!("Marked \"{}\" as complete.", selected),
-        Err(_err) => eprintln!("Error: Unable to mark as complete."),
+        Ok(_val) => println!("Marked reminder as complete."),
+        Err(_err) => eprintln!("Error: Unable to mark reminder as complete."),
     };
 }
 
 pub fn list() {
-    println!("{}", util::get_reminders().join("\n"));
+    let reminders = util::get_reminders();
+
+    if reminders.len() == 0 {
+        return println!("No reminders.");
+    }
+
+    for reminder in reminders {
+        println!("* {}", reminder);
+    }
 }
