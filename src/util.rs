@@ -17,13 +17,13 @@ pub fn get_input(prompt: &str) -> String {
     match Input::<String>::with_theme(&theme)
         .with_prompt(prompt)
         .interact()
-    {
-        Ok(val) => val,
-        Err(err) => {
-            eprintln!("Error: Failed to open prompt");
-            panic!(err)
+        {
+            Ok(val) => val,
+            Err(err) => {
+                eprintln!("Error: Failed to open prompt");
+                panic!(err)
+            }
         }
-    }
 }
 
 pub fn get_choice(options: Vec<String>) -> String {
@@ -32,13 +32,13 @@ pub fn get_choice(options: Vec<String>) -> String {
         .default(0)
         .items(&options[..])
         .interact()
-    {
-        Ok(val) => val,
-        Err(err) => {
-            eprintln!("Error: Failed to open prompt");
-            panic!(err)
-        }
-    };
+        {
+            Ok(val) => val,
+            Err(err) => {
+                eprintln!("Error: Failed to open prompt");
+                panic!(err)
+            }
+        };
 
     options[selection].to_string()
 }
