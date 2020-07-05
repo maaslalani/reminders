@@ -1,5 +1,8 @@
+use crate::util;
+
 pub fn add() {
-    println!("TODO: Add")
+    let reminder = util::get_input("Reminder");
+    let date = util::parse_date(util::get_input("When"));
 }
 
 pub fn complete() {

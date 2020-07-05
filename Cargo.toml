@@ -9,3 +9,4 @@ edition = "2018"
 [dependencies]
 dialoguer = "0.6.2"
 chrono-english = "0.1.4"
+chrono = "0.4.12"

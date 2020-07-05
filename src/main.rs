@@ -1,5 +1,6 @@
 mod reminders;
 mod help;
+mod util;
 
 use std::env;
 
