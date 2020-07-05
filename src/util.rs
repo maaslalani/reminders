@@ -7,7 +7,10 @@ use std::str;
 pub fn parse_date(string: String) -> String {
     match parse_date_string(&string, Local::now(), Dialect::Us) {
         Ok(val) => val.format("%B %d %Y %r").to_string(),
-        Err(err) => panic!(err),
+        Err(_err) => {
+            eprintln!("Error: Invalid Date.");
+            std::process::exit(1);
+        }
     }
 }
 
@@ -16,13 +19,13 @@ pub fn get_input(prompt: &str) -> String {
     match Input::<String>::with_theme(&theme)
         .with_prompt(prompt)
         .interact()
-    {
-        Ok(val) => val,
-        Err(err) => {
-            eprintln!("Error: Failed to open prompt");
-            panic!(err)
+        {
+            Ok(val) => val,
+            Err(err) => {
+                eprintln!("Error: Failed to open prompt");
+                panic!(err)
+            }
         }
-    }
 }
 
 pub fn get_choice(options: Vec<String>) -> String {
@@ -31,13 +34,13 @@ pub fn get_choice(options: Vec<String>) -> String {
         .default(0)
         .items(&options[..])
         .interact()
-    {
-        Ok(val) => val,
-        Err(err) => {
-            eprintln!("Error: Failed to open prompt");
-            panic!(err)
-        }
-    };
+        {
+            Ok(val) => val,
+            Err(err) => {
+                eprintln!("Error: Failed to open prompt");
+                panic!(err)
+            }
+        };
 
     options[selection].to_string()
 }
