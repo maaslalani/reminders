@@ -4,7 +4,7 @@ use chrono::prelude::*;
 
 pub fn parse_date(string: String) -> String {
     match parse_date_string(&string, Local::now(), Dialect::Us) {
-        Ok(val) => val.format("%c").to_string(),
+        Ok(val) => val.format("%B %d %Y %r").to_string(),
         Err(err) => panic!(err),
     }
 }
