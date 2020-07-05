@@ -12,8 +12,6 @@ fn main() {
                 _ => help::usage(),
             }
         }
-        None => {
-            reminders::add();
-        }
+        None => reminders::add(),
     };
 }
