@@ -4,7 +4,6 @@ on run argv
     set dateTime to item 2 of argv
 
     make new reminder with properties { name: reminderName, due date: date dateTime }
-
     quit
   end tell
 end run
