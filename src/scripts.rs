@@ -1,5 +1,5 @@
-use std::process::{Command,ExitStatus,Output};
 use std::io::Error;
+use std::process::{Command,ExitStatus,Output};
 
 pub fn add_reminder(reminder: String, date: String) -> Result<ExitStatus, Error> {
     Command::new("osascript")

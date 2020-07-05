@@ -1,4 +1,4 @@
-use chrono::prelude::*;
+use chrono::prelude::Local;
 use chrono_english::{parse_date_string, Dialect};
 use dialoguer::{theme, Input, Select};
 
