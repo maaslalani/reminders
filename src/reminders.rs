@@ -18,9 +18,20 @@ pub fn add() {
 }
 
 pub fn complete() {
-    println!("TODO: Complete")
+    let options = util::get_reminders();
+    let selected = util::get_choice(options);
+
+    let command = Command::new("osascript")
+        .arg("src/scripts/complete.applescript")
+        .arg(&selected)
+        .output();
+
+    match command {
+        Ok(_val) => println!("Marked \"{}\" as complete.", selected),
+        Err(_err) => eprintln!("Error: Unable to mark as complete."),
+    };
 }
 
 pub fn list() {
-    println!("TODO: List")
+    println!("{}", util::get_reminders().join("\n"));
 }
