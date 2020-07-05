@@ -6,7 +6,8 @@ pub fn add() {
     let date = util::parse_date(util::get_input("When"));
 
     let command = Command::new("osascript")
-        .arg("src/scripts/add.applescript")
+        .arg("-e")
+        .arg(include_str!("scripts/add.applescript"))
         .arg(&reminder)
         .arg(&date)
         .status();
@@ -27,7 +28,8 @@ pub fn complete() {
     let selected = util::get_choice(options);
 
     let command = Command::new("osascript")
-        .arg("src/scripts/complete.applescript")
+        .arg("-e")
+        .arg(include_str!("scripts/complete.applescript"))
         .arg(&selected)
         .output();
 

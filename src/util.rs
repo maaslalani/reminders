@@ -47,7 +47,8 @@ pub fn get_choice(options: Vec<String>) -> String {
 
 pub fn get_reminders() -> Vec<String> {
     let command = Command::new("osascript")
-        .arg("src/scripts/list.applescript")
+        .arg("-e")
+        .arg(include_str!("scripts/list.applescript"))
         .output();
 
     match command {
